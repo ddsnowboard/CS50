@@ -1,3 +1,6 @@
+# This is just in the repository so I can double click it and run it
+# without having to put in a bunch of directories. I should probably
+# remove it or move it to root. 
 # Give this input.txt and it will replace all tabs with 4 spaces. 
 import sys
 if len(sys.argv)==1:
