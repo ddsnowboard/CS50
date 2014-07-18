@@ -5,11 +5,10 @@
 import sys
 if len(sys.argv)==1:
 	if sys.version_info[0]<3:
-		i = raw_input("What is the input file, with extension? ")
-		o = raw_input("What will the output be, with extension? ")
-	elif sys.version_info[0]>=3:
-		i = input("What is the input file, with extension? ")
-		o = input("What will the output be, with extension? ")
+		input = raw_input
+
+	i = input("What is the input file, with extension? ")
+	o = input("What will the output be, with extension? ")
 elif len(sys.argv)==3:
 	i = sys.argv[1]
 	o = sys.argv[2]
