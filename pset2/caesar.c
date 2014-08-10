@@ -14,7 +14,6 @@ int main(int argc, char* argv[])
     else
     {
         int k = atoi(argv[1]);
-        printf("Please give your text to be enciphered: ");
         string text = GetString();
         for(int i = 0; i<strlen(text);i++)
         {
