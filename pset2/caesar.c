@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 char rotate(char c, int k);
 int main(int argc, char* argv[])
@@ -17,24 +18,27 @@ int main(int argc, char* argv[])
         string text = GetString();
         for(int i = 0; i<strlen(text);i++)
         {
-            printf(rotate(text[i], k));
+            printf("%c", rotate(text[i], k));
         }
     }
 }
 char rotate(char c, int k)
 {
-    char[26] lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    char[26] upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    // This might not work, but give it a try. 
+    char lower[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    char upper[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     int i = (int)c;
-    if (c >= "a" && c <="z")
+    if (c >= 'a' && c <= 'z')
     {
         i = i-97;
         return (char)lower[i+(k%26)];
     }
-    else if (c>="A" && c <="Z")
+    else if (c >= 'A' && c <= 'Z')
     {
         i = i - 65;
-        return (char)upper[(i+k)%26];
-    } 
+        return (char)upper[i+(k%26)];
+    }
+    else
+    {
+        return c;
+    }
 }
