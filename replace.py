@@ -3,7 +3,7 @@
 # remove it or move it to root. 
 # Give this input.txt and it will replace all tabs with 4 spaces. 
 import sys
-if len(sys.argv)==1:
+if len(sys.argv) == 1:
 	if sys.version_info[0]<3:
 		input = raw_input
 
@@ -13,7 +13,7 @@ elif len(sys.argv)==3:
 	i = sys.argv[1]
 	o = sys.argv[2]
 else:
-	raise Exception("You gave too many arguments!")
+	raise Exception("You gave too many or too few arguments!")
 with open(i, 'r')  as f:
 	with open(o, 'a') as w:
 		for j in f: 

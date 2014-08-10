@@ -25,7 +25,16 @@ char rotate(char c, int k)
 {
     char[26] lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     char[26] upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    // I'm working on this thing, I need to find a function that gets the ASCII number of a letter so I can use that number
-    // to get the index in the above arrays, then add k%26 to the index, and return that index from the array. If that makes 
-    // any sense. 
+    // This might not work, but give it a try. 
+    int i = (int)c;
+    if (c >= "a" && c <="z")
+    {
+        i = i-97;
+        return (char)lower[i+(k%26)];
+    }
+    else if (c>="A" && c <="Z")
+    {
+        i = i - 65;
+        return (char)upper[i+(k%26)];
+    } 
 }
