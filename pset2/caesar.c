@@ -30,11 +30,15 @@ char rotate(char c, int k)
     if (c >= 'a' && c <= 'z')
     {
         i = i-97;
+		printf("%i", i);
+		printf("%c", lower[i]);
         return (char)lower[i+(k%26)];
     }
     else if (c >= 'A' && c <= 'Z')
     {
         i = i - 65;
+		printf("%i", i);
+		printf("%c", upper[i]);
         return (char)upper[i+(k%26)];
     }
     else
