@@ -35,6 +35,6 @@ char rotate(char c, int k)
     else if (c>="A" && c <="Z")
     {
         i = i - 65;
-        return (char)upper[i+(k%26)];
+        return (char)upper[(i+k)%26];
     } 
 }
