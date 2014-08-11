@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
         }
     }
     
-	
+    
     int arr[len];
     for (int i = 0; i<len; i++)
     {
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
         arr[i] = argv[1][i] - 97;
     }
     string input = GetString();
-	// This takes care of punctuation and spaces. It goes up whenever I see one so it ignores them like it's supposed to. 
+    // This takes care of punctuation and spaces. It goes up whenever I see one so it ignores them like it's supposed to. 
     int offset = 0;
     for (int i = 0; i<strlen(input);i++)
     {

@@ -6,13 +6,13 @@
 char rotate(char c, int k);
 int main(int argc, char* argv[])
 {
-	// Check input. 
+    // Check input. 
     if (argc != 2)
     {
         printf("You gave the wrong amount of arguments!");
         return 1;
     }
-	
+    
     else
     {
         int k = atoi(argv[1]);
