@@ -40,7 +40,7 @@ string rotate(string pass)
 	{
 		if(pass[i] >= 'a' && pass[i] < 'z')
 		{
-			pass[i]++;
+			pass[i] = pass[i] + 1;
 			return pass;
 		}
 		else if(pass[i] == 'z')
