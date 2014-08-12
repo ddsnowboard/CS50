@@ -1,19 +1,18 @@
+#define _XOPEN_SOURCE
 #include <stdio.h>
 #include <crypt.h>
 #include <string.h>
 #include <cs50.h>
-#define _XOPEN_SOURCE
 #include <unistd.h>
 string rotate(string password);
-int main(int argc, char* argv[])
+
+int main(int argc, char *argv[])
 {
-    if(argc != 2)
+    printf("started\n");
+    printf("%d\n", argc);
+    if(argc == 2)
     {
-        printf("You need to give the encrypted password, you fool!\n");
-        return 1;
-    }
-    else
-    {
+        printf("Working");
         string hash = argv[1];
         string password = "aa";
         string salt = "aa";
@@ -26,25 +25,30 @@ int main(int argc, char* argv[])
 		}
 		printf("%s\n", password);
 		return 0;
+    }
+    else
+    {
+        printf("You need to give the encrypted password, you fool!\n");
+        return 1;
     }    
 }
 
-string rotate(string password)
+string rotate(string pass)
 {
-	int len = strlen(password);
+	int len = strlen(pass);
 	for(int i = len-1;i >= 0; i--)
 	{
-		if(password[i] >= 'a' && password[i] < 'z')
+		if(pass[i] >= 'a' && pass[i] < 'z')
 		{
-			password[i]++;
-			return password;
+			pass[i]++;
+			return pass;
 		}
-		else if(password[i] == 'z')
+		else if(pass[i] == 'z')
 		{
-			password[i] = 'a';
+			pass[i] = 'a';
 			if(i == 0)
 			{
-				return strcat("a", password);
+				return strcat("a", pass);
 			}
 		}
 	}
