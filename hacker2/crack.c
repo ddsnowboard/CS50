@@ -6,10 +6,13 @@
 char* rotate(char* password);
 int main(int argc, char *argv[])
 {
+	// For debugging. This always shows up. 
     printf("started\n");
     if(argc == 2)
     {
+		// More debugging. This shows up too. 
         printf("%d\n", argc);
+		// But this doesn't. 
         printf("Working\n");
         char* hash = argv[1];
         char password[] = "aa";
