@@ -5,14 +5,13 @@
 #include <cs50.h>
 #include <unistd.h>
 string rotate(string password);
-
 int main(int argc, char *argv[])
 {
     printf("started\n");
-    printf("%d\n", argc);
     if(argc == 2)
     {
-        printf("Working");
+        printf("%d\n", argc);
+        printf("Working\n");
         string hash = argv[1];
         string password = "aa";
         string salt = "aa";
@@ -20,8 +19,8 @@ int main(int argc, char *argv[])
         while (crypt(password, salt) != hash && password != error)
 		{
 		    password = rotate(password);
-		    salt[0] = password[0];
-		    salt[1] = password[1];
+/*		    salt[0] = password[0];*/
+/*		    salt[1] = password[1];*/
 		}
 		printf("%s\n", password);
 		return 0;
@@ -54,3 +53,4 @@ string rotate(string pass)
 	}
 	return "ERROR";
 }
+
