@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <crypt.h>
 #include <string.h>
-#include <cs50.h>
 #include <unistd.h>
 char* rotate(char* password);
 int main(int argc, char *argv[])
@@ -12,13 +11,13 @@ int main(int argc, char *argv[])
     {
         printf("%d\n", argc);
         printf("Working\n");
-        char* hash[] = argv[1];
-        char* password[10] = "aa";
-        char* salt[5] = "aa";
-        char* error[8] = "ERROR";
-        while (crypt(password, salt) != hash && password != error)
+        char* hash = argv[1];
+        char password[] = "aa";
+        char salt[5] = "aa";
+        char error[8] = "ERROR";
+        while (crypt(password, salt) != hash && strcmp(password, error))
 		{
-		    password = rotate(password);
+		    char* password = rotate(password);
 		    salt[0] = password[0];
 		    salt[1] = password[1];
 		}
