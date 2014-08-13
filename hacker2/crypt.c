@@ -4,7 +4,7 @@
 #include <string.h>
 #include <cs50.h>
 #include <unistd.h>
-string rotate(string password);
+char* rotate(char* password);
 int main(int argc, char *argv[])
 {
     printf("started\n");
@@ -12,15 +12,15 @@ int main(int argc, char *argv[])
     {
         printf("%d\n", argc);
         printf("Working\n");
-        string hash = argv[1];
-        string password = "aa";
-        string salt = "aa";
-        string error = "ERROR";
+        char* hash[] = argv[1];
+        char* password[10] = "aa";
+        char* salt[5] = "aa";
+        char* error[8] = "ERROR";
         while (crypt(password, salt) != hash && password != error)
 		{
 		    password = rotate(password);
-/*		    salt[0] = password[0];*/
-/*		    salt[1] = password[1];*/
+		    salt[0] = password[0];
+		    salt[1] = password[1];
 		}
 		printf("%s\n", password);
 		return 0;
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     }    
 }
 
-string rotate(string pass)
+char* rotate(char* pass)
 {
 	int len = strlen(pass);
 	for(int i = len-1;i >= 0; i--)
