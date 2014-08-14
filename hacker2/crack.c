@@ -4,23 +4,33 @@
 #include <string.h>
 #include <unistd.h>
 char* rotate(char* password);
+char* saltRotate(char* salt);
 int main(int argc, char *argv[])
 {
-    printf("started\n");
     if(argc == 2)
     {
-        printf("%d\n", argc);
-        printf("Working\n");
         char* hash = argv[1];
         char password[10];
         strcpy(password,"aa");
-        char salt[5] = "aa";
+        char salt[3] = "aa";
+        int done = 0;
         char error[8] = "ERROR";
-        while (crypt(password, salt) != hash && strcmp(password, error))
+        while (done == 0 && strcmp(password, error))
 		{
-		    strcpy(password,rotate(password));
-		    salt[0] = password[0];
-		    salt[1] = password[1];
+		    printf("%s, %s\n", salt, password);
+            if (crypt(password, salt) == hash)
+            {
+                done = 1;
+            }
+            else if (!(strcmp(salt, "--")))
+            {
+                strcpy(password,rotate(password));
+                strcpy(salt, "aa");
+            }
+            else
+            {
+                strcpy(salt, saltRotate(salt));
+            }
 		}
 		printf("%s\n", password);
 		return 0;
@@ -48,7 +58,6 @@ char* rotate(char* pass)
 			pass[i] = 'a';
 			if(i == 0)
             {
-			    printf("Added");
 			    char* val = strcat(a, pass);
 				return val;
 			}
@@ -57,3 +66,40 @@ char* rotate(char* pass)
 	return "ERROR";
 }
 
+char* saltRotate(char* salt)
+{
+    if((salt[1] >= 'a' && salt[1] < 'z') || (salt[1] >='A' && salt[1] < 'Z') || (salt[1] >= '0' && salt[1] < '9'))
+    {
+        salt[1]++;
+    }
+    else if(salt[1] == '/')
+    {
+        if((salt[0] >= 'a' && salt[0] < 'z') || (salt[0] >= 'A' && salt[0] < 'Z') || (salt[0] >= '0' && salt[0] < '9'))
+        {
+            salt[0]++;
+            salt[1] = 'a';
+        }
+        else if (salt[0] == 'z')
+        {
+            salt[0] = 'A';
+            salt[1] = 'a';
+        }
+        else if (salt[0] == 'Z')
+            salt[0] = '0';
+        else if (salt[0] == '9')
+            salt[0] = '.';
+        else if (salt[0] == '.')
+            salt[0] = '/';
+        else if(strcmp(salt, "//") == 0)
+            salt = "--";
+    }
+    else if (salt[1] == 'z')
+        salt[1] = 'A';
+    else if (salt[1] == 'Z')
+        salt[1] = '0';
+    else if (salt[1] == '9')
+        salt[1] = '.';
+    else if (salt[1] == '.')
+        salt[1] = '/';
+    return salt;
+}
