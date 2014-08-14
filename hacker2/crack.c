@@ -6,21 +6,19 @@
 char* rotate(char* password);
 int main(int argc, char *argv[])
 {
-	// For debugging. This always shows up. 
     printf("started\n");
     if(argc == 2)
     {
-		// More debugging. This shows up too. 
         printf("%d\n", argc);
-		// But this doesn't. 
         printf("Working\n");
         char* hash = argv[1];
-        char password[] = "aa";
+        char password[10];
+        strcpy(password,"aa");
         char salt[5] = "aa";
         char error[8] = "ERROR";
         while (crypt(password, salt) != hash && strcmp(password, error))
 		{
-		    char* password = rotate(password);
+		    strcpy(password,rotate(password));
 		    salt[0] = password[0];
 		    salt[1] = password[1];
 		}
@@ -37,6 +35,7 @@ int main(int argc, char *argv[])
 char* rotate(char* pass)
 {
 	int len = strlen(pass);
+	char a[2] = "a";
 	for(int i = len-1;i >= 0; i--)
 	{
 		if(pass[i] >= 'a' && pass[i] < 'z')
@@ -48,8 +47,10 @@ char* rotate(char* pass)
 		{
 			pass[i] = 'a';
 			if(i == 0)
-			{
-				return strcat("a", pass);
+            {
+			    printf("Added");
+			    char* val = strcat(a, pass);
+				return val;
 			}
 		}
 	}
