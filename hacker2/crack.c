@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         char error[8] = "ERROR";
         while (done == 0 && strcmp(password, error))
 		{
-		    printf("%s, %s\n", salt, password);
+		   // printf("%s, %s\n", salt, password);
             if (crypt(password, salt) == hash)
             {
                 done = 1;
