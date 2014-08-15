@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     {
         char password[10];
         FILE *f = fopen("/usr/share/dict/words", "r");
-        char* line;
+        char* line = malloc(500);
         strcpy(password,"aa");
         char salt[3] = {argv[1][0], argv[1][1]};
         char* thisHash;
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
             thisHash = crypt(line, salt);
             if(strcmp(thisHash, hash) == 0)
             {
-                printf("%s", line);
+                printf("%s\n", line);
                 return 0;
             }
         }
