@@ -12,15 +12,23 @@ int main(int argc, char *argv[])
     if(argc == 2)
     {
         char password[10];
+        FILE *f = fopen("/usr/share/dict/words", "r");
+        char* line;
         strcpy(password,"aa");
         char salt[3] = {argv[1][0], argv[1][1]};
         char* thisHash;
         int done = 0;
         int counter = 0;
         char error[8] = "ERROR";
-        for(int i = 0; i<479828;i++)
+        while(fgets(line, 1024, f))
         {
-            
+            line[strlen(line)-1] = 0;
+            thisHash = crypt(line, salt);
+            if(strcmp(thisHash, hash) == 0)
+            {
+                printf("%s", line);
+                return 0;
+            }
         }
         while (done == 0)
 		{
@@ -32,8 +40,6 @@ int main(int argc, char *argv[])
             {
 				strcpy(password, rotate(password));
                 thisHash = crypt(password, salt);
-		        // printf("%s\n",cryptOut);
-                // strcpy(salt, saltRotate(salt));
             }
             if (counter == 100000)
             {
