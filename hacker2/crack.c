@@ -3,22 +3,26 @@
 #include <crypt.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 char* rotate(char* password);
 char* saltRotate(char* salt);
 int main(int argc, char *argv[])
 {
+    char* hash = argv[1];
+    printf("%s\n", hash);
     if(argc == 2)
     {
-        char* hash = argv[1];
         char password[10];
         strcpy(password,"aa");
-        char salt[3] = "aa";
+        char salt[3] = {argv[1][0], argv[1][1]};
+        char thisHash[16] = "FFFFFFFFFFFFF";
         int done = 0;
-/*        int counter = 0;*/
+        char* cryptOut;
+        int counter = 0;
         char error[8] = "ERROR";
         while (done == 0 && strcmp(password, error))
 		{
-            if (crypt(password, salt) == hash)
+            if (strcmp(thisHash, hash) == 0)
             {
                 done = 1;
             }
@@ -29,16 +33,19 @@ int main(int argc, char *argv[])
             }
             else
             {
+                cryptOut = crypt(password, salt);
+		        printf("%s\n",cryptOut);
+		        strcpy(thisHash, cryptOut);
                 strcpy(salt, saltRotate(salt));
             }
             
-/*            if (counter == 1000)*/
-/*            {*/
-/*                 printf("%s, %s\n", salt, password);*/
-/*                 counter = 0;*/
-/*            }*/
-/*            else*/
-/*                counter++;*/
+            if (counter == 10000)
+            {
+                 printf("%s, %s\n", salt, password);
+                 counter = 0;
+            }
+            else
+                counter++;
 		}
 		printf("%s\n", password);
 		return 0;
