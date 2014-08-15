@@ -1,17 +1,17 @@
 #include <crypt.h>
 #include <stdio.h>
 #include <string.h>
-char* crimson(void)
+/*int main(void)*/
+/*{*/
+/*    printf("%s\n", crypt("bad", "aa"));*/
+/*}*/
+
+int main(void)
 {
-    return "crimson";
-}
-int main(int argc, char* argv[])
-{
-    char* hash = argv[1];
-    printf("%s", hash);
-    char* crim;
-    strcpy(crim, crimson());
-    char* fifty = "50";
-    char* test = crypt(crim, fifty);
-	printf("%s\n", test);
-}
+    FILE *f = fopen("/usr/share/dict/words", "r");
+    char* line;
+    while(fgets(line, 1024, f))
+    {
+        printf("%s", line);
+    }
+} 

@@ -9,7 +9,6 @@ char* saltRotate(char* salt);
 int main(int argc, char *argv[])
 {
     char* hash = argv[1];
-    printf("%s\n", hash);
     if(argc == 2)
     {
         char password[10];
@@ -19,6 +18,10 @@ int main(int argc, char *argv[])
         int done = 0;
         int counter = 0;
         char error[8] = "ERROR";
+        for(int i = 0; i<479828;i++)
+        {
+            
+        }
         while (done == 0)
 		{
             if (strcmp(thisHash, hash) == 0)
@@ -32,7 +35,7 @@ int main(int argc, char *argv[])
 		        // printf("%s\n",cryptOut);
                 // strcpy(salt, saltRotate(salt));
             }
-            if (counter == 10000)
+            if (counter == 100000)
             {
                  printf("%s\n", password);
                  counter = 0;
