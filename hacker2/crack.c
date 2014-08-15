@@ -15,33 +15,26 @@ int main(int argc, char *argv[])
         char password[10];
         strcpy(password,"aa");
         char salt[3] = {argv[1][0], argv[1][1]};
-        char thisHash[16] = "FFFFFFFFFFFFF";
+        char* thisHash;
         int done = 0;
-        char* cryptOut;
         int counter = 0;
         char error[8] = "ERROR";
-        while (done == 0 && strcmp(password, error))
+        while (done == 0)
 		{
             if (strcmp(thisHash, hash) == 0)
             {
                 done = 1;
             }
-            else if (!(strcmp(salt, "--")))
-            {
-                strcpy(password,rotate(password));
-                strcpy(salt, "aa");
-            }
             else
             {
-                cryptOut = crypt(password, salt);
-		        printf("%s\n",cryptOut);
-		        strcpy(thisHash, cryptOut);
-                strcpy(salt, saltRotate(salt));
+				strcpy(password, rotate(password));
+                thisHash = crypt(password, salt);
+		        // printf("%s\n",cryptOut);
+                // strcpy(salt, saltRotate(salt));
             }
-            
             if (counter == 10000)
             {
-                 printf("%s, %s\n", salt, password);
+                 printf("%s\n", password);
                  counter = 0;
             }
             else
