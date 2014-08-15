@@ -1,5 +1,6 @@
 #include <crypt.h>
+#include <stdio.h>
 int main(void)
 {
-	printf(crypt("apples", "aa"));
+	printf("%s\n", crypt("apples", "aa"));
 }

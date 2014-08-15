@@ -14,10 +14,10 @@ int main(int argc, char *argv[])
         strcpy(password,"aa");
         char salt[3] = "aa";
         int done = 0;
+/*        int counter = 0;*/
         char error[8] = "ERROR";
         while (done == 0 && strcmp(password, error))
 		{
-		   // printf("%s, %s\n", salt, password);
             if (crypt(password, salt) == hash)
             {
                 done = 1;
@@ -31,6 +31,14 @@ int main(int argc, char *argv[])
             {
                 strcpy(salt, saltRotate(salt));
             }
+            
+/*            if (counter == 1000)*/
+/*            {*/
+/*                 printf("%s, %s\n", salt, password);*/
+/*                 counter = 0;*/
+/*            }*/
+/*            else*/
+/*                counter++;*/
 		}
 		printf("%s\n", password);
 		return 0;
