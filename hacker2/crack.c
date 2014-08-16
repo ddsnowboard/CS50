@@ -122,7 +122,7 @@ char* rotate(char* pass)
         }
     }
     // If none of that works, like we have some weird letters in the password for 
-    // some reason, return "ERROR". Also, clang was complainging that it might not
+    // some reason, return "ERROR". Also, clang was complaining that it might not
     // return anything. 
     return "ERROR";
 }
