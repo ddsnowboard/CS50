@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         int done = 0;
         // I only print every 100,000 so not to harm performance too much. In 
         // the final version, the printing will be gone. 
-        int counter = 0;
+        //int counter = 0;
         // I was told not to use "magic numbers", and I thought that applied here. 
         char error[8] = "ERROR";
         // While there's still file left...
@@ -69,14 +69,14 @@ int main(int argc, char *argv[])
                 // And get its new hash. 
                 thisHash = crypt(password, salt);
             }
-            if (counter == 100000)
-            {
-                // Every 100,000, print out the one we're on, just so I know it's working. 
-                 printf("%s\n", password);
-                 counter = 0;
-            }
-            else
-                counter++;
+/*            if (counter == 100000)*/
+/*            {*/
+/*                // Every 100,000, print out the one we're on, just so I know it's working. */
+/*                 printf("%s\n", password);*/
+/*                 counter = 0;*/
+/*            }*/
+/*            else*/
+/*                counter++;*/
         }
         printf("%s\n", password);
         return 0;
