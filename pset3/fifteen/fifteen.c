@@ -131,7 +131,20 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+	int count = 1;
+    for(int i = 0;i<d;i++)
+	{
+		for(int j = 0;j<d;j++)
+		{
+			if(count<=(d*d)-1)
+			{
+				board[i][j] = count;
+				count++;
+			}
+			else
+				board[i][j] = 0;
+		}
+	}
 }
 
 /**
@@ -139,16 +152,46 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+    for(int i = 0;i<d;i++)
+	{
+		for(int j = 0;j<d;j++)
+		{
+			if(board[i][j]!=0)
+				printf("%i     ", board[i][j]);
+			else
+				printf("      ");
+		}
+		printf("\n");
+	}
 }
 
+int *searchBoard(int tile, int out[])
+{
+	//Linear search, I know. For up to 9 tiny lists, at total of 81 in all, I'm not too worried about time. 
+	for(int i = 0;i<d;i++)
+	{
+		for(int j=0;j<d;j++)
+		{
+			if(board[i][j] == tile)
+			{
+				out[1] = i;
+				out[2] = j;
+				return out;
+			}
+		}
+	}
+	return 0;
+}
 /**
  * If tile borders empty space, moves tile and returns true, else
  * returns false. 
  */
 bool move(int tile)
 {
-    // TODO
+    int out[2];
+	if(searchBoard(tile) == 1)
+	{
+		
     return false;
 }
 
