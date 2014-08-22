@@ -23,13 +23,13 @@ bool search(int value, int values[], int n)
     while(!done)
     {
         pick = (start+end)/2;
-        if(values[pick]>value)
-            end = pick;
-        else if(values[pick]<value)
-            start = pick;
-        else if(values[pick] == value)
+        if(values[pick] == value)
             done = 1;
-        else if(start = end-1)
+        else if(values[pick]>value && start != end-1)
+            end = pick;
+        else if(values[pick]<value && start != end-1)
+            start = pick; 
+        else if(start == end-1)
             return false;
     }
     return true;
