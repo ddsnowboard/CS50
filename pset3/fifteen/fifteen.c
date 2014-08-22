@@ -159,7 +159,7 @@ void draw(void)
 			if(board[i][j]!=0)
 				printf("%i     ", board[i][j]);
 			else
-				printf("      ");
+				printf("__    ");
 		}
 		printf("\n");
 	}
