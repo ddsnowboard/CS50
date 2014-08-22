@@ -16,7 +16,23 @@
  */
 bool search(int value, int values[], int n)
 {
-    
+    int start = 0;
+    int end  = n;
+    int pick;
+    int done = 0;
+    while(!done)
+    {
+        pick = (start+end)/2;
+        if(values[pick]>value)
+            end = pick;
+        else if(values[pick]<value)
+            start = pick;
+        else if(values[pick] == value)
+            done = 1;
+        else if(start = end-1)
+            return false;
+    }
+    return true;
 }
 
 /**
