@@ -34,6 +34,9 @@ int board[MAX][MAX];
 // board's dimension
 int d;
 
+// winning configuration, setup in init()
+int win[MAX][MAX];
+
 // empty space
 int space[2];
 
@@ -124,7 +127,7 @@ void greet(void)
 {
     clear();
     printf("GAME OF FIFTEEN\n");
-    usleep(2000000);
+    usleep(200000);
 }
 
 /**
@@ -134,25 +137,49 @@ void greet(void)
  */
 void init(void)
 {
-    int count = 1;
+    int count = d*d-1;
     for(int i = 0;i<d;i++)
     {
         for(int j = 0;j<d;j++)
         {
-            if(count>=(d*d)-3 && count <= (d*d)-1 && d%2 == 1)
+            if(count == 2 && d%2 == 0)
             {
                 // This should do 1 for the third last, and 2 for the second last, 
                 // otherwise it shouldn't run. 
-                board[i][j] = count%(d*d-4);
+                board[i][j] = 1;
+                count--;
             }
-            else if(count<=(d*d)-1)
+            else if (count == 1 && d%2 == 0)
+            {
+                board[i][j] = 2;
+                count--;
+            }
+            else if(count<=(d*d)-1 && count != 0)
             {
                 board[i][j] = count;
-                count++;
+                count--;
             }
             else
+            {
                 board[i][j] = 0;
-                space = {i,j};
+                space[0] = i;
+                space[1] = j;
+                count--;
+            }
+        }
+    }
+    count = 1;
+    for(int i = 0;i<d;i++)
+    {
+        for(int j = 0;j<d;j++)
+        {
+            if(count == (d*d)-1)
+                win[i][j] = 0;
+            else
+            {
+                win[i][j] = count;
+                count++;
+            }
         }
     }
 }
@@ -166,7 +193,7 @@ void draw(void)
     {
         for(int j = 0;j<d;j++)
         {
-            if(board[i][j]!=0)
+            if(board[i][j] != 0)
                 printf("%i     ", board[i][j]);
             else
                 printf("__    ");
@@ -175,10 +202,10 @@ void draw(void)
     }
 }
 
-int *searchBoard(int tile)
+int* searchBoard(int tile)
 {
     //Linear search, I know. For up to 9 tiny lists, at total of 81 in all, I'm not too worried about time. 
-    int out[2];
+    static int out[2];
     for(int i = 0;i<d;i++)
     {
         for(int j=0;j<d;j++)
@@ -191,7 +218,8 @@ int *searchBoard(int tile)
             }
         }
     }
-    out = {999, 999};
+    out[0] = 999;
+    out[1] = 999;
     return out;
 }
 /**
@@ -200,24 +228,45 @@ int *searchBoard(int tile)
  */
 bool move(int tile)
 {
-    int set[2] = searchBoard(tile);
+    int* set;
+    set = searchBoard(tile);
     int ERROR[2] = {999, 999};
     // check if the abs (cast to unsigned) of the difference b/w this spot and 
     // the space is one, then move it there. 
-    if(out != error && (unsigned))
+    if(set != ERROR && (abs(set[0]-space[0]) + abs(set[1]-space[1]) == 1))
     {
+        board[set[0]][set[1]] = 0;
+        board[space[0]][space[1]] = tile;
+        space[0] = set[0];
+        space[1] = set[1];
+        return true;
+    }
         
     return false;
 }
-
+// compares 2 arrays of arrays
+bool arrcmp(int a1[][d], int a2[][d], int n)
+{
+    for(int i = 0;i<n;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            if(a1[i][j] != a2[i][j])
+                return false;
+        }
+    }
+    return true;
+}
 /**
  * Returns true if game is won (i.e., board is in winning configuration), 
  * else false.
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    if(arrcmp(win, board, d))
+        return true;
+    else
+        return false;
 }
 
 /**
