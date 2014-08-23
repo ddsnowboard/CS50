@@ -134,27 +134,27 @@ void greet(void)
  */
 void init(void)
 {
-	int count = 1;
+    int count = 1;
     for(int i = 0;i<d;i++)
-	{
-		for(int j = 0;j<d;j++)
-		{
-			if(count>=(d*d)-3 && count <= (d*d)-1 && d%2 == 1)
-			{
-				// This should do 1 for the third last, and 2 for the second last, 
-				// otherwise it shouldn't run. 
-				board[i][j] = count%(d*d-4);
-			}
-			else if(count<=(d*d)-1)
-			{
-				board[i][j] = count;
-				count++;
-			}
-			else
-				board[i][j] = 0;
-				space = {i,j};
-		}
-	}
+    {
+        for(int j = 0;j<d;j++)
+        {
+            if(count>=(d*d)-3 && count <= (d*d)-1 && d%2 == 1)
+            {
+                // This should do 1 for the third last, and 2 for the second last, 
+                // otherwise it shouldn't run. 
+                board[i][j] = count%(d*d-4);
+            }
+            else if(count<=(d*d)-1)
+            {
+                board[i][j] = count;
+                count++;
+            }
+            else
+                board[i][j] = 0;
+                space = {i,j};
+        }
+    }
 }
 
 /**
@@ -163,36 +163,36 @@ void init(void)
 void draw(void)
 {
     for(int i = 0;i<d;i++)
-	{
-		for(int j = 0;j<d;j++)
-		{
-			if(board[i][j]!=0)
-				printf("%i     ", board[i][j]);
-			else
-				printf("__    ");
-		}
-		printf("\n");
-	}
+    {
+        for(int j = 0;j<d;j++)
+        {
+            if(board[i][j]!=0)
+                printf("%i     ", board[i][j]);
+            else
+                printf("__    ");
+        }
+        printf("\n");
+    }
 }
 
 int *searchBoard(int tile)
 {
-	//Linear search, I know. For up to 9 tiny lists, at total of 81 in all, I'm not too worried about time. 
-	int out[2];
-	for(int i = 0;i<d;i++)
-	{
-		for(int j=0;j<d;j++)
-		{
-			if(board[i][j] == tile)
-			{
-				out[0] = i;
-				out[1] = j;
-				return out;
-			}
-		}
-	}
-	out = {999, 999};
-	return out;
+    //Linear search, I know. For up to 9 tiny lists, at total of 81 in all, I'm not too worried about time. 
+    int out[2];
+    for(int i = 0;i<d;i++)
+    {
+        for(int j=0;j<d;j++)
+        {
+            if(board[i][j] == tile)
+            {
+                out[0] = i;
+                out[1] = j;
+                return out;
+            }
+        }
+    }
+    out = {999, 999};
+    return out;
 }
 /**
  * If tile borders empty space, moves tile and returns true, else
@@ -201,12 +201,12 @@ int *searchBoard(int tile)
 bool move(int tile)
 {
     int set[2] = searchBoard(tile);
-	int ERROR[2] = {999, 999};
-	// check if the abs (cast to unsigned) of the difference b/w this spot and 
-	// the space is one, then move it there. 
-	if(out != error && (unsigned))
-	{
-		
+    int ERROR[2] = {999, 999};
+    // check if the abs (cast to unsigned) of the difference b/w this spot and 
+    // the space is one, then move it there. 
+    if(out != error && (unsigned))
+    {
+        
     return false;
 }
 
